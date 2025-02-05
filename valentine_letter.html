@@ -6,13 +6,14 @@
     <title>Surat Valentine</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: pink;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
             text-align: center;
+            flex-direction: column;
         }
         .card {
             background: white;
@@ -20,10 +21,20 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             max-width: 350px;
+            position: relative;
         }
         .heart {
             color: red;
             font-size: 40px;
+            animation: heartbeat 1s infinite;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .music-control {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -33,6 +44,22 @@
         <p>Untuk seseorang yang spesial,</p>
         <p>Semoga hari ini penuh dengan cinta dan kebahagiaan. Terima kasih telah menjadi bagian dari hidupku! 💕</p>
         <h2 class="heart">❤️</h2>
+        <div class="music-control">
+            <button onclick="playMusic()">🎵 Play</button>
+            <button onclick="pauseMusic()">⏸ Pause</button>
+        </div>
     </div>
+    <audio id="bg-music" loop>
+        <source src="your-song.mp3" type="audio/mpeg">
+        Browser tidak mendukung pemutar musik.
+    </audio>
+    <script>
+        function playMusic() {
+            document.getElementById('bg-music').play();
+        }
+        function pauseMusic() {
+            document.getElementById('bg-music').pause();
+        }
+    </script>
 </body>
 </html>
