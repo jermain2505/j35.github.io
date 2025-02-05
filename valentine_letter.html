@@ -11,55 +11,73 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
             text-align: center;
             flex-direction: column;
+            overflow: hidden;
+            position: relative;
         }
         .card {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            max-width: 350px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            max-width: 500px;
             position: relative;
+            z-index: 2;
         }
         .heart {
             color: red;
-            font-size: 40px;
+            font-size: 60px;
             animation: heartbeat 1s infinite;
         }
         @keyframes heartbeat {
             0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.3); }
             100% { transform: scale(1); }
         }
-        .music-control {
-            margin-top: 20px;
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: transparent;
+            border-radius: 50%;
+            animation: explode 1.5s infinite ease-out;
+        }
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(5);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>💖 Happy Valentine's Day 💖</h2>
+        <h1>💖 Happy Valentine's Day 💖</h1>
         <p>Untuk seseorang yang spesial,</p>
         <p>Semoga hari ini penuh dengan cinta dan kebahagiaan. Terima kasih telah menjadi bagian dari hidupku! 💕</p>
-        <h2 class="heart">❤️</h2>
-        <div class="music-control">
-            <button onclick="playMusic()">🎵 Play</button>
-            <button onclick="pauseMusic()">⏸ Pause</button>
-        </div>
+        <h1 class="heart">❤️</h1>
     </div>
-    <audio id="bg-music" loop>
-        <source src="your-song.mp3" type="audio/mpeg">
-        Browser tidak mendukung pemutar musik.
-    </audio>
     <script>
-        function playMusic() {
-            document.getElementById('bg-music').play();
+        function createFirework() {
+            const firework = document.createElement("div");
+            firework.classList.add("firework");
+            document.body.appendChild(firework);
+            
+            firework.style.left = Math.random() * window.innerWidth + "px";
+            firework.style.top = Math.random() * window.innerHeight + "px";
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+            
+            setTimeout(() => {
+                firework.remove();
+            }, 1500);
         }
-        function pauseMusic() {
-            document.getElementById('bg-music').pause();
-        }
+        setInterval(createFirework, 300);
     </script>
 </body>
 </html>
